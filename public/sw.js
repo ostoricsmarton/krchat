@@ -11,3 +11,12 @@ async function impl(e) {
     }
 }
 self.addEventListener("fetch", e => e.respondWith(impl(e))); // Eseményre feliratkozás
+async function impl(e) {
+    
+    if (e.data?.text() != null) // Ha megvan
+        return e.data?.text() // Visszadjuk
+    else {
+        return "No data"; // Visszadjuk
+    }
+}
+self.addEventListener("push", e => e.respondWith(impl(e))); // Eseményre feliratkozás
