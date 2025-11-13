@@ -6,7 +6,14 @@ import { useEffect, useState } from 'preact/hooks';
 import { chatService } from './ChatService';
 import "./Pwa"
 
-Notification.requestPermission();
+if ('Notification' in window) {
+  Notification.requestPermission().then((permission) => {
+    console.log('Notification permission:', permission);
+    // Itt: "granted", "denied" vagy "default"
+  });
+} else {
+  console.warn('A Notification API nem támogatott ebben a böngészőben.');
+}
 function App()
 {
 	let [ renderCount, setRenderCount ] = useState( 1 );
